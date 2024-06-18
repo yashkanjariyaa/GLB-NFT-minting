@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import GLBNFT from "../contracts/artifacts/GLBNFT.json";
 import Web3 from "web3";
+import "./nftlist.css";
 
 const Model = ({ uri, ...props }) => {
   const { scene } = useGLTF(uri);
@@ -71,31 +72,38 @@ const NFTList = () => {
   }
 
   return (
-    <div>
-      <button
-        onClick={(e) => {
-          navigateToMint(e);
-        }}
-      >
-        Mint NFTS
-      </button>
-      <div className="minter">{minter}</div>
-      <div className="balance">{balance}</div>
-      <h2>Owned NFTs</h2>
+    <div className="nft-list">
+      <div className="head">
+        <div className="user">
+          <div className="minter">Minter: {minter}</div>
+          <div className="balance">
+            Balance: {balance ? balance : "Server issue"}
+          </div>
+        </div>
+        <button
+          className="mint-btn"
+          onClick={(e) => {
+            navigateToMint(e);
+          }}
+        >
+          Mint NFTS
+        </button>
+      </div>
+      <h2 style={{marginLeft: "1vw"}}>Owned NFTs</h2>
       {loading ? (
         <p>Loading NFTs...</p>
       ) : (
-        <ul style={{ listStyleType: "none", padding: 0 }}>
+        <ul className="list" style={{ listStyleType: "none" }}>
           {tokenURIs.map((uri, index) => (
             <li key={index} style={{ margin: "20px 0" }}>
-              <div className="token-id">Token ID: {index}</div>
-              <div style={{ height: "600px", width: "600px" }}>
+              <div className="token-id">#{index}</div>
+              <div style={{ height: "350px", width: "350px" }}>
                 <Canvas style={{ background: "#000" }}>
                   <OrbitControls />
                   <ambientLight intensity={0.7} />
                   <directionalLight position={[0, 5, 5]} />
                   <Suspense fallback={null}>
-                    <Model uri={uri} scale={[1, 1, 1]} position={[0, 0, 0]} />
+                    <Model uri={uri} scale={[4, 4, 4]} position={[0, 0, 0]} />
                   </Suspense>
                 </Canvas>
               </div>

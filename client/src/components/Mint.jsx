@@ -5,13 +5,18 @@ import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareCaretDown } from "@fortawesome/free-solid-svg-icons";
+import GLBNFT from "../contracts/artifacts/GLBNFT.json";
 import "./mint.css";
 
 const Mint = () => {
   const [uploading, setUploading] = useState(false);
   const [fileUrl, setFileUrl] = useState("");
   const [cid, setCid] = useState(null);
+  const [fileName, setFileName] = useState("");
   const navigate = useNavigate();
+
+  const contractAddress = import.meta.env.VITE_CONTRACT;
+  const contractABI = GLBNFT.abi;
 
   const web3 = new Web3(window.ethereum);
 
@@ -35,7 +40,7 @@ const Mint = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const metadata = JSON.stringify({ name: "model.glb" });
+      const metadata = JSON.stringify({ name: fileName });
       formData.append("pinataMetadata", metadata);
 
       const options = JSON.stringify({ cidVersion: 0 });
@@ -110,31 +115,50 @@ const Mint = () => {
 
   return (
     <div className="mint">
-      <button onClick={e => {navigateToNFTList(e)}}>View your NFTs</button>
-      <div className="head">Upload the GLB file</div>
-      <div className="container">
-        <div
-          {...getRootProps()}
-          style={{
-            border: "2px dashed #000",
-            padding: "20px",
-            textAlign: "center",
+      <div className="head">
+        Upload the GLB file{" "}
+        <button
+          className="view-nft-btn"
+          onClick={(e) => {
+            navigateToNFTList(e);
           }}
         >
-          <input className="drop" {...getInputProps()} />
-          {isDragActive ? (
-            <p>Drop the files here ...</p>
-          ) : (
-            <>
-              <p>Drop a GLB file here, or click to select a file</p>
-              <FontAwesomeIcon className="drop-icon" icon={faSquareCaretDown} />
-            </>
-          )}
-        </div>
+          View your NFTs
+        </button>
       </div>
-      {fileUrl && <p>File uploaded to: {fileUrl}</p>}
-      {uploading && <p>Uploading your model...</p>}
-      <button onClick={mintNFT}>Mint NFT</button>
+      <div className="form">
+        <input className="filename" placeholder="Name your NFT" type="text" />
+        <div className="container-drop">
+          <div
+            {...getRootProps()}
+            style={{
+              border: "2px dashed #000",
+              padding: "20px",
+              textAlign: "center",
+            }}
+          >
+            <input className="drop" {...getInputProps()} />
+            {isDragActive ? (
+              <p>Drop the files here ...</p>
+            ) : (
+              <>
+                <p>Drop a GLB file here, or click to select a file</p>
+                <FontAwesomeIcon
+                  className="drop-icon"
+                  icon={faSquareCaretDown}
+                />
+              </>
+            )}
+          </div>
+        </div>
+        <button className="mint-btn" onClick={mintNFT}>
+          Mint NFT
+        </button>
+      </div>
+      <div className="response">
+        {fileUrl && <p className="uploaded">File uploaded to: {fileUrl}</p>}
+        {uploading && <p className="uploading">Uploading your model...</p>}
+      </div>
     </div>
   );
 };

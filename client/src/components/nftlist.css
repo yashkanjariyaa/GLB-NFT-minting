@@ -1,0 +1,76 @@
+/* Custom scrollbar styles for WebKit browsers (Chrome, Safari) */
+.nft-list .list::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.nft-list .list::-webkit-scrollbar-track {
+  background: black;
+  border-radius: 10px;
+}
+
+.nft-list .list::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 10px;
+}
+
+/* Custom scrollbar styles for Firefox */
+.nft-list .list {
+  scrollbar-width: thin;
+  scrollbar-color: white black;
+}
+
+/* Main CSS for the .nft-list */
+.nft-list {
+  margin-left: 16vw;
+}
+
+.nft-list .mint-btn {
+  color: white;
+  background: #000;
+  border: 1px solid white;
+  padding: 1vw;
+  font-size: 1vw;
+  border-radius: 10px;
+  height: 7vh;
+}
+
+.nft-list .head {
+  padding: 1vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 60vw;
+}
+
+.nft-list .user {
+  font-size: 1.5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 1vw 0;
+}
+
+.nft-list .list {
+  display: grid;
+  gap: 0.5vw;
+  grid-auto-flow: dense;
+  grid-template-columns: auto auto;
+  width: 60vw;
+  height: 70vh;
+  overflow-y: scroll;
+  padding: 1vw;
+}
+
+.list li {
+  border: 1px solid var(--blue);
+  width: min-content;
+  height: min-content;
+  padding: 1vw;
+  border-radius: 10px;
+}
+
+.list li .token-id {
+  font-size: 1.5vw;
+}
