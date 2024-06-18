@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Web3 } from "web3";
+import Web3 from "web3";
 
 function WalletConnection() {
   const [isChecked, setIsChecked] = useState(false);
   const [connected, setConnected] = useState(false);
-  const [account, setAccount] = useState(null);
+  const [accounts, setAccounts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,9 +18,9 @@ function WalletConnection() {
         await window.ethereum.request({ method: "eth_requestAccounts" });
         const web3 = new Web3(window.ethereum);
         const accounts = await web3.eth.getAccounts();
-        setAccount(accounts[0]);
+        setAccounts(accounts);
         if (accounts.length > 0) {
-          localStorage.setItem("account", account[0]);
+          localStorage.setItem("account", accounts[0]);
           setConnected(true);
           isChecked ? navigate("/admin") : navigate("/mint");
         }
@@ -37,7 +37,7 @@ function WalletConnection() {
       if (window.ethereum) {
         const web3 = new Web3(window.ethereum);
         const accounts = await web3.eth.getAccounts();
-        setAccount(accounts[0]);
+        setAccounts(accounts);
         if (accounts.length > 0) {
           localStorage.setItem("account", accounts[0]);
           setConnected(true);
@@ -47,27 +47,31 @@ function WalletConnection() {
     };
 
     checkConnection();
-  }, [account]);
+  }, [accounts, isChecked, navigate]);
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
   };
 
   return (
-    <div>
+    <div className="metaMaskConnection">
       {!connected ? (
-        <button onClick={connectWallet}>Connect MetaMask</button>
+        <button onClick={connectWallet} className="btn">
+          Connect MetaMask
+        </button>
       ) : (
-        <p>Wallet Connected</p>
+        <div className="walletConnected">Wallet Connected</div>
       )}
-      <label>
+      <label className="label">
         <input
           type="checkbox"
+          className="input"
           checked={isChecked}
           onChange={handleCheckboxChange}
         ></input>
         Admin?
       </label>
+      <div className="line"></div>
     </div>
   );
 }

@@ -1,0 +1,114 @@
+.home {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.home .hash {
+  color: #155edc;
+  font-weight: 1000;
+  font-size: 5vw;
+}
+.home .connect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  height: 100%;
+}
+.home .logo {
+  display: flex;
+}
+#eth {
+  height: 10vw;
+  width: 10vw;
+}
+#three {
+  font-size: 9vw;
+}
+.home .model {
+  background: url("/assets/bg1.jpg");
+  background-size: cover;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  height: 100%;
+  position: relative;
+}
+.home .model canvas {
+    backdrop-filter: blur(5px);
+  width: 100%;
+  height: 100%;
+}
+.home .head {
+  margin: 1vw;
+  font-size: 4vw;
+  line-height: 1;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.metaMaskConnection .btn {
+  font-size: 1vw;
+  background: none;
+  border: 2px rgb(0, 145, 255) solid;
+  border-radius: 10px;
+  padding: 0.8vw;
+  color: white;
+}
+.label {
+  margin: 0.5vw 2vw;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  user-select: none;
+  color: #ffffff;
+}
+.input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #00002f;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+  cursor: pointer;
+  position: relative;
+}
+.input:checked {
+  background-color: #0d50c3;
+}
+.input:checked::after {
+  background-color: #0d83c3;
+  border-radius: 2px solid white;
+}
+.input:hover {
+  border: 2px solid white;
+  background-color: #055e8a;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+.canvas {
+  color: white;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  padding: 1vw;
+  font-size: 2vw;
+  font-weight: 700;
+}

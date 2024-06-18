@@ -1,0 +1,18 @@
+.mint .head{
+    font-size: 5vw;
+    font-weight: 700;
+    margin: 1vw 2vw;
+}
+.mint .container{
+    height: 30vh;
+    width: 70vw;
+    border: 2px solid rgb(0, 157, 255);
+    border-radius: 15px;
+    padding: 0.5vw;
+    font-size: 1vw;
+    margin: 1vw;
+}
+.mint .drop-icon{
+    margin: 1vw;
+    font-size: 3vw;
+}
